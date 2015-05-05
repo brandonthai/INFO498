@@ -101,7 +101,7 @@ function createVisual(data) {
     .style("fill", function(d) { return "rgb(" + gscale(d.vol) + "," + gscale(d.vol) + "," + gscale(d.vol) + ")";}) //returns rgb value depending on the d.vol
     //.style("opacity","0.5"); 
     .on("click", function(d) {  
-      infobox.html(d.Operator + "<br />" + d.Date + "<br /><br />" + d.Summary + "<br /><br /> Passengers Aboard: " + d.Aboard + "<br />Fatalities: " + d.Fatalities)
+      infobox.html("<h2>" + d.Operator + "</h2>" + "<br />" + d.Date + "<br /><br />" + d.Summary + "<br /><br /><b> Passengers Aboard: </b>" + d.Aboard + "<br /><b>Fatalities: " + d.Fatalities + "</b>")
         .attr("class", "infobox-show");
         // d3.select(this)
         // .style("visibility", "visible")
