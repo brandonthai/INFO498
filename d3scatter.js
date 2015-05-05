@@ -7,6 +7,13 @@ function updateFilter(option) {
       d.price = +d.price;
     });
 
+    // $( document ).ready(function() {
+    //   $('#slider').on('change', function() {
+    //   var x = $('#slider').val();
+    //   $("#valBox").text($(this).val());
+    //   });
+    // });
+
     var filter = option.value;    
 
     if (filter.toLowerCase() == "private") {
@@ -20,15 +27,28 @@ function updateFilter(option) {
     } else {
       createVisual(data);
     }
-
 })};
 
-$( document ).ready(function() {
-    $('#slider').on('change',function() {
-    var x = $('#slider').val();
+$(document).ready(function() {
+  $('#slider').on('change', function() {
+    var numOfFatalities = $('#slider').val();
     $("#valBox").text($(this).val());
+
+    d3.csv("crashes.csv", function(error, data) {
+
+      if(error) return console.warn(error);
+
+      data.forEach(function(d) {
+        d.price = +d.price;
+      });
+
+      console.log(numOfFatalities);
+      var newData = data.filter(function(d) { return d.Fatalities == numOfFatalities});
+      createVisual(newData);
     });
+  });
 });
+
 
 
 //Alters the size of the graph
