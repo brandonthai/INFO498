@@ -23,6 +23,14 @@ function updateFilter(option) {
 
 })};
 
+$( document ).ready(function() {
+    $('#slider').on('change',function() {
+    var x = $('#slider').val();
+    $("#valBox").text($(this).val());
+    });
+});
+
+
 //Alters the size of the graph
 var margin = {top: 30, right: 20, bottom: 30, left: 50};
     var w = 640 - margin.left - margin.right;

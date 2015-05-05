@@ -52,8 +52,9 @@ body {
 </style>
 
 <body>
-  <script src="http://d3js.org/d3.v3.min.js"></script>
-  <script src="d3scatter.js"></script>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="d3scatter.js"></script>
 
 <!--   <select id="airplane-type" onchange="dropDown(this)">
     <option value="0" selected="selected">(none)</option>
@@ -68,6 +69,9 @@ body {
   </select>
 
   <div class="summary"></div>
+
+  <span id="valBox">0</span><br>
+<input type="range" id="slider" value="60" min="0" max="275">
 
 </body>
 </html>
