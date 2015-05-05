@@ -1,25 +1,46 @@
+function updateFilter(option) {
+  d3.csv("crashes.csv", function(error, data) {
+
+    if(error) return console.warn(error);
+
+    data.forEach(function(d) {
+      d.price = +d.price;
+    });
+
+    var filter = option.value;    
+
+    if (filter.toLowerCase() == "private") {
+      console.log("change to private");
+      var filteredData = data.filter(function(i) { return (i.Operator.indexOf("Military") != -1 || i.Operator.indexOf("Private") != -1) });
+      createVisual(filteredData);
+    } else if (filter.toLowerCase() == "commercial") {
+      console.log("change to commercial");
+      var filteredData = data.filter(function(i) { return (i.Operator.indexOf("Military") == -1 && i.Operator.indexOf("Private") == -1) });
+      createVisual(filteredData);
+    } else {
+      createVisual(data);
+    }
+
+})};
+
 //Alters the size of the graph
 var margin = {top: 30, right: 20, bottom: 30, left: 50};
     var w = 640 - margin.left - margin.right;
     var h = 480 - margin.top - margin.bottom;
 
 var yMax = 0;
-var x;
-var y;
 
-d3.csv("crashes.csv", function(error, stocks) {
-  console.log(stocks);
+var color = d3.scale.category20();
+
+d3.csv("crashes.csv", function(error, data) {
+  console.log(data);
   if(error) return console.warn(error);
-    stocks.forEach(function(d) {
+    data.forEach(function(d) {
       d.price = +d.price;
       //d.date = format.parse(d.date);
-  });
-    var data = stocks;
-    createVisual(data);
-    yMax = d3.max(data, function(d) {
-       return +d.Fatalities;
-    });    
-    console.log(yMax); 
+    }
+  );
+  createVisual(data);
 });
 
 var col = d3.scale.category10();
@@ -27,10 +48,8 @@ var col = d3.scale.category10();
 var svg = d3.select("body").append("svg")
     .attr("width", w + margin.left + margin.right)
     .attr("height", h + margin.top + margin.bottom)
-  .append("g")
+    .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-console.log(yMax);
 
 // set up x
 var x = d3.scale.linear()
@@ -41,7 +60,6 @@ var x = d3.scale.linear()
 var y = d3.scale.linear()
         .domain([0, 275])
         .range([h, 0]);
-
 
 //creates own scale with set  rbg range and max vol
 var gscale = d3.scale.linear().domain([0, 1200]).range([0,255]);
@@ -59,11 +77,13 @@ var tooltip = d3.select("body").append("div")
   .style("opacity", 0);
 
 function createVisual(data) {
+ d3.selectAll("circle").remove(); 
  var circles = svg.selectAll("circle")
  .data(data)
  .enter()
  .append("circle")
-    .attr("cx", function(d) { return x(d.Date);  })
+    .attr("fill",function(d,i){return color(i);})
+    .attr("cx", function(d) { return x(d.Year);  })
     .attr("cy", function(d) { return y(d.Fatalities);  })
     .attr("r", 4)
     .style("stroke","black")
@@ -92,9 +112,3 @@ function createVisual(data) {
             .style("cursor", "default");
       });
 }
-
-
-
-
-
-

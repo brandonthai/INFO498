@@ -25,10 +25,22 @@ body {
 
 </style>
 <body>
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<script src="d3scatter.js"></script>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="d3scatter.js"></script>
 
-<div class="summary"></div>
+<!--   <select id="airplane-type" onchange="dropDown(this)">
+    <option value="0" selected="selected">(none)</option>
+    <option value="Private">Private</option>
+    <option value="Commercial">Commercial</option>
+  </select> -->
+
+  <select id="airplane-type" onchange="updateFilter(this)">
+    <option value="none" selected="selected">(none)</option>
+    <option value="Private">Private/Military</option>
+    <option value="Commercial">Commercial</option>
+  </select>
+
+  <div class="summary"></div>
 
 </body>
 </html>
