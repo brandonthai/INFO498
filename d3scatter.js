@@ -72,6 +72,9 @@ var yAxis = d3.svg.axis().scale(y).orient("left"); //orient: puts it on the left
 
 svg.append("g").attr("class", "axis").call(yAxis).append("text").attr("transform", "rotate(-90)").attr("y", 6).attr("dy", ".71em").style("text-anchor", "end").text("Fatalities");
 
+var infobox = d3.select("body").append("div")
+  .attr("class", "infobox");
+
 var tooltip = d3.select("body").append("div")
   .attr("class", "tooltip")
   .style("opacity", 0);
@@ -89,6 +92,14 @@ function createVisual(data) {
     .style("stroke","black")
     .style("fill", function(d) { return "rgb(" + gscale(d.vol) + "," + gscale(d.vol) + "," + gscale(d.vol) + ")";}) //returns rgb value depending on the d.vol
     //.style("opacity","0.5"); 
+    .on("click", function(d) {  
+      infobox.html(d.Operator + "<br />" + d.Date + "<br /><br />" + d.Summary + "<br /><br /> Passengers Aboard: " + d.Aboard + "<br />Fatalities: " + d.Fatalities)
+        .attr("class", "infobox-show");
+        // d3.select(this)
+        // .style("visibility", "visible")
+        // .style("opacity", 1)
+        // .style("transition", "opacity " +  2 + "s linear");
+    })
     .on("mouseover", function(d) {
       tooltip.transition()
         .duration(100)
