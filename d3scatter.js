@@ -32,9 +32,14 @@ function updateMonth(option) {
       console.log(d.Month);
     });
 
-    var month = option.value;  
-    var newData = data.filter(function(d) { return (d.Month == month) });
-    createVisual(newData);
+    var month = option.value; 
+    
+    if(month == "none") {
+      createVisual(data);
+    } else { 
+      var newData = data.filter(function(d) { return (d.Month == month) });
+      createVisual(newData);
+    }
 
 })};
 
