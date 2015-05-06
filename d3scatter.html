@@ -29,13 +29,14 @@ body {
   color: #000;
   padding: 25px;
   position: absolute;
-  top: 60px;
+  top: 25px;
   right: 230px;
-  width: 200px;
+  width: 350px;
   opacity: 0;
   visibility: hidden;
   transition: visibility 0s 2s, opacity 2s linear;
   word-wrap: break-word;
+  margin-right: -200px;
 }
 
 .infobox-show {
@@ -43,13 +44,14 @@ body {
   color: #000;
   padding: 25px;
   position: absolute;
-  top: 60px;
+  top: 25px;
   right: 230px;
-  width: 200px;
+  width: 350px;
   opacity: 1;
   visibility: visible;
   transition: opacity 2s linear;
   word-wrap: break-word;
+  margin-right: -200px;
 }
 </style>
 
@@ -69,6 +71,7 @@ body {
     <div class="col-md-4">
       <h1 style="text-align: center;">Plane Crashes and Fatalities <br> <small>2000 - 2009</small></h1>
       <br>
+      <p>DISCLAIMER: Filter functionality is independent of each filter.</p>
       <br>
       <label>Filter by Plane Type</label>
       <select class="btn btn-default" id="airplane-type" onchange="updateFilter(this)">

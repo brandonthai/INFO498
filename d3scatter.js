@@ -108,7 +108,7 @@ function createVisual(data) {
     .style("fill", function(d) { return "rgb(" + gscale(d.vol) + "," + gscale(d.vol) + "," + gscale(d.vol) + ")";}) //returns rgb value depending on the d.vol
     //.style("opacity","0.5"); 
     .on("click", function(d) {  
-      infobox.html("<h2>" + d.Operator + "</h2>" + "<br />" + d.Date + "<br /><br />" + d.Summary + "<br /><br /><b> Passengers Aboard: </b>" + d.Aboard + "<br /><b>Fatalities: " + d.Fatalities + "</b>")
+      infobox.html("<h2>" + d.Operator + "&nbsp; <small>" + "(" + d.Date + ")" + "</small>" + "</h2>" + "<br />"  + d.Summary + "<br /><br /><b> Passengers Aboard: </b>" + d.Aboard + "<br /><b>Fatalities: </b>" + d.Fatalities)
         .attr("class", "infobox-show");
         // d3.select(this)
         // .style("visibility", "visible")
@@ -154,16 +154,16 @@ $(function() {
 }
 
 function updateRange(first, second) {
-          d3.csv("crashes.csv", function(error, data) {
+    d3.csv("crashes.csv", function(error, data) {
 
-          if(error) return console.warn(error);
+    if(error) return console.warn(error);
 
-          data.forEach(function(d) {
-            d.price = +d.price;
-          });
+    data.forEach(function(d) {
+      d.price = +d.price;
+    });
 
-          //console.log(numOfFatalities);
-          var newData = data.filter(function(d) { return d.Fatalities >= first && d.Fatalities <= second });
-          createVisual(newData);
-        });
+    //console.log(numOfFatalities);
+    var newData = data.filter(function(d) { return d.Fatalities >= first && d.Fatalities <= second });
+    createVisual(newData);
+  });
 }
