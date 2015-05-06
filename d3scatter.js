@@ -22,28 +22,21 @@ function updateFilter(option) {
     }
 })};
 
-// $(document).ready(function() {
+function updateMonth(option) {
+  d3.csv("crashes.csv", function(error, data) {
 
-//   $('#slider').on('change', function() {
+    if(error) return console.warn(error);
 
-//     var numOfFatalities = $('#slider').val();
-//     $("#valBox").text($(this).val());
+    data.forEach(function(d) {
+      d.price = +d.price;
+      console.log(d.Month);
+    });
 
-//     d3.csv("crashes.csv", function(error, data) {
+    var month = option.value;  
+    var newData = data.filter(function(d) { return (d.Month == month) });
+    createVisual(newData);
 
-//       if(error) return console.warn(error);
-
-//       data.forEach(function(d) {
-//         d.price = +d.price;
-//       });
-
-//       console.log(numOfFatalities);
-//       var newData = data.filter(function(d) { return d.Fatalities == numOfFatalities});
-//       createVisual(newData);
-//     });
-//   });
-// });
-
+})};
 
 //Alters the size of the graph
 var margin = {top: 30, right: 20, bottom: 30, left: 50};
