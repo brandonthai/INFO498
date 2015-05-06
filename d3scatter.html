@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
+
 <style>
 
 body {
@@ -53,8 +54,12 @@ body {
 
 <body>
 <script src="http://d3js.org/d3.v3.min.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 <script src="d3scatter.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
 
 <!--   <select id="airplane-type" onchange="dropDown(this)">
     <option value="0" selected="selected">(none)</option>
@@ -70,8 +75,31 @@ body {
 
   <div class="summary"></div>
 
-  <span id="valBox">0</span><br>
-<input type="range" id="slider" value="60" min="0" max="275">
+  <select id="month" onchange="">
+    <option value="none" selected="selected">(none)</option>
+    <option value="1">January</option>
+    <option value="2">February</option>
+    <option value="3">March</option>
+    <option value="4">April</option>
+    <option value="5">May</option>
+    <option value="6">June</option>
+    <option value="7">July</option>
+    <option value="8">August</option>
+    <option value="9">September</option>
+    <option value="10">October</option>
+    <option value="11">November</option>
+    <option value="12">December</option>
+  </select>
+
+  <br />
+
+<p>
+  <label for="amount">Number of Fatalities:</label>
+  <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+</p>
+ 
+<div id="slider-range"></div>
+
 
 </body>
 </html>
