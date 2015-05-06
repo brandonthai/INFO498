@@ -67,7 +67,7 @@ d3.csv("crashes.csv", function(error, data) {
 
 var col = d3.scale.category10();
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select("div").append("svg")
     .attr("width", w + margin.left + margin.right)
     .attr("height", h + margin.top + margin.bottom)
     .append("g")
