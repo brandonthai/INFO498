@@ -1,4 +1,7 @@
 var dataset; // global variable for data from CSV file
+var secondaryData;
+var tertiaryData;
+var master;
 
 d3.csv("crashes.csv", function(error, data) {
     if(error) return console.warn(error);
@@ -8,35 +11,39 @@ d3.csv("crashes.csv", function(error, data) {
     );
 
     dataset = data;    
+    master = dataset;
     createVisual(data);
 });
 
-function updateRange(first, second) {
-    var newData = dataset.filter(function(d) { return d.Fatalities >= first && d.Fatalities <= second });
-    createVisual(newData);
-}
-
-function updateFilter(option) {
+function updateFilter(option) {    
     var filter = option.value;    
-    if (filter.toLowerCase() == "private") {
-      var filteredData = dataset.filter(function(i) { return (i.Operator.indexOf("Military") != -1 || i.Operator.indexOf("Private") != -1) });
+    if (filter.toLowerCase() == "private") {      
+      var filteredData = dataset.filter(function(i) { return (i.Operator.indexOf("Military") != -1 || i.Operator.indexOf("Private") != -1) });      
       createVisual(filteredData);
-    } else if (filter.toLowerCase() == "commercial") {
-      var filteredData = dataset.filter(function(i) { return (i.Operator.indexOf("Military") == -1 && i.Operator.indexOf("Private") == -1) });
+      secondaryData = filteredData; //daniel's changes
+    } else if (filter.toLowerCase() == "commercial") {      
+      var filteredData = dataset.filter(function(i) { return (i.Operator.indexOf("Military") == -1 && i.Operator.indexOf("Private") == -1) });      
       createVisual(filteredData);
-    } else {
+      secondaryData = filteredData; //daniel's changes
+    } else {      
       createVisual(dataset);
     }
 }
 
 function updateMonth(option) {
     var month = option.value; 
-    if(month == "none") {
-      createVisual(dataset);
-    } else { 
-      var newData = dataset.filter(function(d) { return (d.Month == month) });
+    if(month == "none") {      
+      createVisual(second);
+    } else {       
+      var newData = secondaryData.filter(function(d) { return (d.Month == month) });
       createVisual(newData);
+      tertiaryData = newData; //daniel's changes
     }
+}
+
+function updateRange(first, second) {
+    var newData = tertiaryData.filter(function(d) { return d.Fatalities >= first && d.Fatalities <= second });
+    createVisual(newData);
 }
 
 function createVisual(data) {
